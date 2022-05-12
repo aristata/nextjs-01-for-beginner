@@ -9,7 +9,7 @@ export default function Home() {
     })(); // 끝에 () 를 붙이는 이유는 익명 함수로 만들기만 하고 호출 하거나 할당 하지 않으면 쓸모가 없기 때문이다
   }, []);
   return (
-    <div>
+    <div className={"container"}>
       {!movies && <h4>Loading...</h4>}
       {movies?.map((movie) => (
         <div className={"movie"} key={movie.id}>
