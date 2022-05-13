@@ -1,10 +1,41 @@
+import Link from "next/link";
+import { useRouter } from "next/router";
+
 export default function Home({ results }) {
+  const router = useRouter();
+  const onClick = (id, title) => {
+    router.push(
+      {
+        pathname: `/movies/${id}`,
+        query: {
+          title: title,
+        },
+      },
+      `/movies/${id}`
+    );
+  };
   return (
     <div className={"container"}>
       {results?.map((movie) => (
-        <div className={"movie"} key={movie.id}>
+        <div
+          className={"movie"}
+          key={movie.id}
+          onClick={() => onClick(movie.id, movie.original_title)}
+        >
           <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-          <h4>{movie.original_title}</h4>
+          <Link
+            href={{
+              pathname: `/movies/${movie.id}`,
+              query: {
+                title: movie.original_title,
+              },
+            }}
+            as={`/movies/${movie.id}`}
+          >
+            <a>
+              <h4>{movie.original_title}</h4>
+            </a>
+          </Link>
         </div>
       ))}
       <style jsx>{`
